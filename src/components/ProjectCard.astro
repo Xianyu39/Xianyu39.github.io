@@ -1,0 +1,30 @@
+---
+import type { Project } from "../types/config";
+import {marked} from "marked"
+
+type Props = Project;
+
+const { title, description, year, url, tags = [] } = Astro.props;
+
+const htmlDescription = marked.parse(description)
+---
+
+<a
+  href={url}
+  target="_blank"
+  class="project-card my-3 p-6 sm:p-7 block group-hover:opacity-65 hover:!opacity-100 transition-all"
+>
+  <div class="flex items-start justify-between gap-4 mb-3">
+    <div>
+      <p class="eyebrow mb-2">{year}</p>
+      <h2 class="font-semibold text-xl">{title}</h2>
+    </div>
+    <span class="project-arrow" aria-hidden="true">↗</span>
+  </div>
+  <div class="project-description">
+    <Fragment set:html={htmlDescription} />
+  </div>
+  <div class="flex flex-wrap gap-2 mt-5">
+    {tags.map((tag) => <span class="tag">{tag}</span>)}
+  </div>
+</a>

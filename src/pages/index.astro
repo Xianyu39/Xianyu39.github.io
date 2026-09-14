@@ -1,0 +1,38 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../layouts/Layout.astro";
+import { homePageContent, identity, projectsPageContent } from "../config";
+import SocialLink from "../components/SocialLink.astro";
+import Link from "../components/Link.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+---
+
+<Layout seo={homePageContent.seo}>
+  <section class="hero max-w-3xl mx-auto px-6">
+    <div class="signal"><span></span> AI INFRA · LLM SYSTEMS</div>
+    <div class="flex items-start justify-between gap-8 mt-9">
+      <div>
+        <p class="eyebrow mb-3">HELLO, I BUILD SYSTEMS FOR MODELS.</p>
+        <h1 class="hero-title">{identity.name}</h1>
+        <p class="hero-role">{homePageContent.role}</p>
+      </div>
+      <Image src={identity.logo} alt={identity.name} width={96} height={96} class="logo-mark" />
+    </div>
+    <p class="hero-copy">{homePageContent.description}</p>
+    <div class="flex flex-wrap items-center gap-5 mt-8">
+      {homePageContent.links.map((link) => <Link text={link.title} href={link.url} />)}
+      <div class="flex gap-4 ml-1">
+        {homePageContent.socialLinks.map((link) => <SocialLink {...link} />)}
+      </div>
+    </div>
+  </section>
+  <section class="mt-24 max-w-3xl mx-auto px-6">
+    <div class="section-heading">
+      <div><p class="eyebrow mb-2">SELECTED WORK</p><h2 class="text-2xl font-semibold">代表项目</h2></div>
+      <a href="/projects" class="muted-link">全部项目 →</a>
+    </div>
+    <div class="grid grid-cols-1 group mt-6">
+      {projectsPageContent.projects.map((project) => <ProjectCard {...project} />)}
+    </div>
+  </section>
+</Layout>
