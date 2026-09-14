@@ -1,8 +1,5 @@
 ---
 import "../styles/global.css";
-import { Image } from "astro:assets";
-import { Icon } from "astro-icon/components";
-import { navBarLinks, identity } from "../config";
 import type { SEOInfo } from "../types/config";
 
 interface Props {
@@ -11,42 +8,6 @@ interface Props {
 
 const { seo } = Astro.props;
 ---
-
-<script>
-  const linkMenuButton = document.getElementById(
-    "link-menu-button"
-  ) as HTMLButtonElement;
-  const linkMenu = document.getElementById("link-menu") as HTMLDivElement;
-  const openIndicator = document.getElementById(
-    "open-indicator"
-  ) as HTMLSpanElement;
-
-  linkMenuButton.addEventListener("click", () => {
-    if (linkMenu.classList.contains("opacity-0")) {
-      linkMenu.classList.remove("pointer-events-none");
-      linkMenu.classList.remove("opacity-0");
-      openIndicator.innerText = "-";
-    } else {
-      linkMenu.classList.add("pointer-events-none");
-      linkMenu.classList.add("opacity-0");
-      openIndicator.innerText = "+";
-    }
-  });
-
-  document.addEventListener("click", (event) => {
-    const isLinkMenuButtonClicked =
-      event.target === linkMenuButton ||
-      linkMenuButton.contains(event.target as Node);
-    const isLinkMenuClicked =
-      event.target === linkMenu || linkMenu.contains(event.target as Node);
-
-    if (!isLinkMenuButtonClicked && !isLinkMenuClicked) {
-      linkMenu.classList.add("pointer-events-none");
-      linkMenu.classList.add("opacity-0");
-      openIndicator.innerText = "+";
-    }
-  });
-</script>
 
 <html lang="zh-CN">
   <head>
@@ -61,79 +22,11 @@ const { seo } = Astro.props;
     <meta property="og:image" content={seo.image} />
   </head>
   <body>
-    <header>
-      <div
-        class="px-6 py-6 max-w-2xl mx-auto flex items-center justify-between"
-      >
-        <a href="/">
-          <Image
-            src={identity.logo}
-            alt={identity.name}
-            width={50}
-            height={50}
-            class="w-[46px] h-[46px] object-cover"
-          />
-        </a>
-        <nav class="ml-auto mr-6 sm:m-0">
-          <ul class="hidden sm:flex sm:items-center sm:gap-2">
-            {
-              navBarLinks.map((link) => (
-                <li>
-                  <a
-                    class="group px-4 py-2 rounded-lg hover:bg-gray-bg opacity-60 hover:opacity-100 transition-all"
-                    href={link.url}
-                    target={link.external ? "_blank" : "_self"}
-                  >
-                    {link.title}
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
-          <div class="relative sm:hidden">
-            <button
-              id="link-menu-button"
-              class="relative font-medium opacity-60 p-4"
-              >菜单 <span id="open-indicator">+</span></button
-            >
-            <div
-              id="link-menu"
-              class="absolute p-2 right-0 bg-gray-bg rounded-lg w-44 transition-opacity ease-in-out duration-300 opacity-0 z-40"
-            >
-              <ul>
-                {
-                  navBarLinks.map((link) => (
-                    <li>
-                      <a
-                        class="block pl-4 py-3"
-                        href={link.url}
-                        target={link.external ? "_blank" : "_self"}
-                      >
-                        {link.title}
-                      </a>
-                    </li>
-                  ))
-                }
-              </ul>
-            </div>
-          </div>
-        </nav>
-        <div>
-          <a
-            href=`mailto:${identity.email}`
-            class="block p-2 opacity-60 hover:opacity-100 transition-opacity"
-            aria-label="Email"
-          >
-            <Icon name="mdi:email" width={20} height={20} />
-          </a>
-        </div>
-      </div>
-    </header>
     <main class="mb-32">
       <slot />
     </main>
-    <footer class="max-w-3xl mx-auto px-6 pb-10 flex justify-between text-sm opacity-50">
-      <span>© {new Date().getFullYear()} 方贺进</span><span>Built with Astro</span>
+    <footer class="site-footer">
+      <span>© {new Date().getFullYear()} Westwoods</span><span>Built with Astro</span>
     </footer>
   </body>
 </html>
@@ -141,12 +34,12 @@ const { seo } = Astro.props;
 <style is:global>
   html {
     font-family: "Inter", "PingFang SC", "Microsoft YaHei", sans-serif;
-    background: #080b10;
+    background: #f7f9fb;
   }
 
   * {
     -webkit-font-smoothing: antialiased;
-    color: #edf2f7;
+    color: #17202b;
   }
 
   code {
@@ -168,6 +61,6 @@ const { seo } = Astro.props;
   }
 
   .post:hover .hover-underline {
-    text-decoration-color: rgba(255, 255, 255, 1);
+    text-decoration-color: rgba(23, 32, 43, 1);
   }
 </style>

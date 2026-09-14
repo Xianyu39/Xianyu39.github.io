@@ -1,38 +1,126 @@
 ---
-import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
-import { homePageContent, identity, projectsPageContent } from "../config";
-import SocialLink from "../components/SocialLink.astro";
-import Link from "../components/Link.astro";
-import ProjectCard from "../components/ProjectCard.astro";
+import { homePageContent } from "../config";
 ---
 
 <Layout seo={homePageContent.seo}>
-  <section class="hero max-w-3xl mx-auto px-6">
-    <div class="signal"><span></span> AI INFRA · LLM SYSTEMS</div>
-    <div class="flex items-start justify-between gap-8 mt-9">
-      <div>
-        <p class="eyebrow mb-3">HELLO, I BUILD SYSTEMS FOR MODELS.</p>
-        <h1 class="hero-title">{identity.name}</h1>
-        <p class="hero-role">{homePageContent.role}</p>
-      </div>
-      <Image src={identity.logo} alt={identity.name} width={96} height={96} class="logo-mark" />
-    </div>
-    <p class="hero-copy">{homePageContent.description}</p>
-    <div class="flex flex-wrap items-center gap-5 mt-8">
-      {homePageContent.links.map((link) => <Link text={link.title} href={link.url} />)}
-      <div class="flex gap-4 ml-1">
-        {homePageContent.socialLinks.map((link) => <SocialLink {...link} />)}
-      </div>
-    </div>
-  </section>
-  <section class="mt-24 max-w-3xl mx-auto px-6">
-    <div class="section-heading">
-      <div><p class="eyebrow mb-2">SELECTED WORK</p><h2 class="text-2xl font-semibold">代表项目</h2></div>
-      <a href="/projects" class="muted-link">全部项目 →</a>
-    </div>
-    <div class="grid grid-cols-1 group mt-6">
-      {projectsPageContent.projects.map((project) => <ProjectCard {...project} />)}
-    </div>
-  </section>
+  <div class="home page-shell">
+    <section class="identity-block" aria-label="Westwoods banner and identity">
+      <img class="identity-banner" src="/banner.png" alt="" aria-hidden="true" />
+    </section>
+
+    <section class="line-grid intro-grid">
+      <article class="line-card intro-card">
+        <p class="card-label">About</p>
+        <h2>👋 Hi, I am Westwoods.</h2>
+        <p class="about-lead">Nice to meet you. Feel free to explore my workspace.</p>
+        <div class="about-roles">
+          <span>AI Infra Engineer</span>
+          <span>Full Stack Developer</span>
+          <span>Knowledge Management</span>
+          <span>SSPAI Annual Writer · 2025</span>
+        </div>
+      </article>
+      <article class="line-card motto-card">
+        <p class="card-label">Motto</p>
+        <p class="motto">A good system is not just fast.</p>
+        <p class="motto-detail">It is <strong>observable</strong>, reproducible, and kind to the next engineer.</p>
+      </article>
+    </section>
+
+    <section class="line-grid profile-grid">
+      <article class="line-card system-art-card" aria-label="LLM system illustration">
+        <img class="system-art-image" src="/left_pic.png" alt="Westwoods left picture" />
+      </article>
+
+      <article class="line-card info-card">
+        <p class="card-label">Education &amp; Experience</p>
+        <div class="timeline">
+          <div class="timeline-item current">
+            <span class="timeline-date">2026.09 — now</span>
+            <div class="timeline-content"><div class="timeline-title"><img src="/logos/kuaishou.svg" alt="快手 logo" /><strong>快手</strong></div><span>LLM 训练 Infra 实习生</span></div>
+            <span class="timeline-summary">快手多模态大模型基座训练 infra，面向 600B+ 多模态 MoE 大模型训练场景</span>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-date">2026.08 — 2026.09</span>
+            <div class="timeline-content"><div class="timeline-title"><img src="/logos/vllm.svg" alt="vLLM logo" /><strong>vLLM-Omni</strong></div><span>开源项目二开</span></div>
+            <span class="timeline-summary">知名开源推理框架 vLLM 官方社区面向 Any-to-Any 多模态大模型推出的高性能推理与 Serving 框架</span>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-date">2026.06 — 2026.09</span>
+            <div class="timeline-content"><div class="timeline-title"><img src="/logos/intel.svg" alt="Intel logo" /><strong>Intel</strong></div><span>AI Software Engineer Graduate Intern</span></div>
+            <span class="timeline-summary">LLM 推理性能建模，预测 LLM 在不同 GPU、TP/PD 配置与推理框架下的部署后的性能表现，支持万级部署配置的快速性能粗排序与不同硬件平台的横向比较。</span>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-date">2026.04 — 2026.06</span>
+            <div class="timeline-content"><div class="timeline-title"><img src="/logos/centific.png" alt="Centific logo" /><strong>Centific</strong></div><span>LLM Engineer Intern</span></div>
+            <span class="timeline-summary">数据标注平台 Oneforma 智能助手，协助标注者和客户理解平台服务、理解用户意图，帮助用户提交 jira 工单、上传简历、反馈问题。</span>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-date">2025.03 — 2026.06</span>
+            <div class="timeline-content"><div class="timeline-title"><strong>食养一点通</strong></div><span>核心开发者 · AI 应用创业项目</span></div>
+            <span class="timeline-summary">toC 食品健康 AI 咨询创业项目，基于网易 QAnything 搭建 RAG 基座，为用户提供识别食品包装、分析配料和营养成分、个性化健康建议和食品推荐。</span>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-date">2024.09 — 2026.06</span>
+            <div class="timeline-content"><div class="timeline-title"><strong>Squeeze LLMOps</strong></div><span>负责人 · LLMOps 平台</span></div>
+            <span class="timeline-summary">面向 30+ 研究人员 LLM API 需求的 LLMOps 平台，基于算力与显存受限的消费级 GPU 异构集群打造</span>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-date">2024.09 — 2027.07</span>
+            <div class="timeline-content"><div class="timeline-title"><img src="/logos/jiangnan-mark.png" alt="江南大学校徽" /><strong>江南大学</strong></div><span>软件工程 · 硕士</span></div>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-date">2020.09 — 2024.07</span>
+            <div class="timeline-content"><div class="timeline-title"><img src="/logos/jiangnan-mark.png" alt="江南大学校徽" /><strong>江南大学</strong></div><span>数字媒体技术 · 学士</span></div>
+          </div>
+        </div>
+      </article>
+    </section>
+  </div>
 </Layout>
+
+<style>
+  .page-shell { width: min(100% - 3rem, 72rem); margin: 0 auto; }
+  .home { padding: 4.5rem 0 5rem; }
+  .identity-block { position: relative; height: clamp(16rem, 30vw, 24rem); border: 1px solid #d9e1e8; border-radius: .65rem; overflow: hidden; background: #eef2f4; }
+  .identity-banner { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+  .line-grid { display: grid; gap: 1rem; margin-top: 1rem; }
+  .intro-grid { grid-template-columns: 1.2fr .8fr; }
+  .equal-grid { grid-template-columns: 1fr 1fr; }
+  .profile-grid { grid-template-columns: 1fr 2fr; align-items: stretch; }
+  .line-card { padding: 1.55rem; border: 1px solid #d9e1e8; border-radius: .65rem; background: #fff; }
+  .line-card h2 { margin: .8rem 0 .7rem; font-size: clamp(1.35rem, 2.6vw, 2.2rem); line-height: 1.2; letter-spacing: -.045em; }
+  .line-card p:not(.card-label):not(.motto):not(.motto-detail) { color: #667585; line-height: 1.75; }
+  .intro-card > p:not(.card-label) { max-width: 40rem; }
+  .about-lead { margin-bottom: .65rem; }
+  .about-roles { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: 1.1rem; }
+  .about-roles span { padding: .43rem .58rem; border: 1px solid #cbdde1; border-radius: .35rem; color: #0b7b83; background: #f4fbfb; font-size: .72rem; }
+  .about-note { margin-top: 1.2rem; }
+  .inline-links { display: flex; flex-wrap: wrap; gap: 1.25rem; margin-top: 1.35rem; }
+  .inline-links a, .section-link, .connect-line a { color: #0b7b83; font-size: .86rem; }
+  .motto-card { display: flex; flex-direction: column; justify-content: center; }
+  .motto { margin: 2.2rem 0 .6rem; color: #0b7b83; font: 500 clamp(1.25rem, 2.5vw, 1.75rem)/1.35 Georgia, serif; }
+  .motto-detail { margin: 0; color: #667585; line-height: 1.7; }
+  .motto-detail strong { color: #0b7b83; font-weight: 600; }
+  .info-card h2 { margin-top: 1.4rem; font-size: 1.3rem; }
+  .info-card > p:not(.card-label):not(.muted) { margin: 0; }
+  .muted { color: #8b98a6 !important; font-size: .86rem; }
+  .timeline { margin-top: 1.15rem; border-top: 1px solid #e2e8ed; }
+  .timeline-item { display: grid; grid-template-columns: 7rem minmax(11rem, .9fr) 1.45fr; gap: .8rem; align-items: center; padding: .68rem 0; border-bottom: 1px solid #e2e8ed; }
+  .timeline-item.current { border-left: 2px solid #0b9ba0; padding-left: .65rem; margin-left: -.65rem; }
+  .timeline-date { color: #8b98a6; font: .68rem/1.35 ui-monospace, SFMono-Regular, Menlo, monospace; white-space: nowrap; }
+  .timeline-item div { display: flex; flex-direction: column; gap: .15rem; min-width: 0; }
+  .timeline-title { display: flex !important; flex-direction: row !important; align-items: center; gap: .45rem; }
+  .timeline-title img { width: 1.25rem; height: 1.25rem; flex: 0 0 auto; object-fit: contain; }
+  .timeline-title img[src*="intel"] { width: 2rem; }
+  .timeline-item strong { color: #17202b; font-size: .86rem; font-weight: 600; }
+  .timeline-item div span { color: #667585; font-size: .77rem; line-height: 1.4; }
+  .timeline-summary { color: #667585; font-size: .75rem; line-height: 1.5; }
+  .system-art-card { min-height: 100%; padding: 0; overflow: hidden; }
+  .system-art-image { display: block; width: 100%; height: 100%; min-height: 28rem; object-fit: cover; object-position: center; }
+  .connect-line { margin-top: 5.5rem; padding-top: 1.2rem; border-top: 1px solid #d9e1e8; color: #667585; }
+  @media (max-width: 980px) { .profile-grid { grid-template-columns: 1fr 1.45fr; } }
+  @media (max-width: 760px) { .page-shell { width: min(100% - 2rem, 42rem); } .intro-grid, .equal-grid, .profile-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 520px) { .home { padding-top: 2.5rem; } .identity-block { height: 22rem; } .line-card { padding: 1.25rem; } .system-art-card { min-height: 24rem; } .section-heading { align-items: flex-start; flex-direction: column; } .timeline-item { grid-template-columns: 1fr; gap: .2rem; } }
+</style>

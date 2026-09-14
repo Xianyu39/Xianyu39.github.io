@@ -8,7 +8,7 @@ import type {
   HomePageContent,
 } from "./types/config";
 
-export const identity: Identity = { name: "方贺进", logo: "/logo.svg", email: "fanghejin@qq.com" };
+export const identity: Identity = { name: "Westwoods", logo: "/logo.webp", email: "" };
 
 export const navBarLinks: NavBarLink[] = [
   {
@@ -36,17 +36,12 @@ export const socialLinks: SocialLink[] = [
     icon: "mdi:github",
     external: true,
   },
-  {
-    title: "Email",
-    url: "mailto:fanghejin@qq.com",
-    icon: "mdi:email",
-  },
 ];
 
 // Home (/)
 export const homePageContent: HomePageContent = {
   seo: {
-    title: "方贺进 · AI Infra Engineer",
+    title: "Westwoods · AI Infra Engineer",
     description: "专注大模型训练、推理优化与 LLM 系统工程。",
     image: identity.logo,
   },
@@ -69,8 +64,8 @@ export const homePageContent: HomePageContent = {
 // About (/about)
 export const aboutPageContent: AboutPageContent = {
   seo: {
-    title: "经历 | 方贺进",
-    description: "方贺进的研究方向、工程经历与技术栈。",
+    title: "经历 | Westwoods",
+    description: "Westwoods 的研究方向、工程经历与技术栈。",
     image: identity.logo,
   },
   subtitle: "训练、推理与系统工程",
@@ -120,7 +115,7 @@ export const aboutPageContent: AboutPageContent = {
 // Projects (/projects)
 export const projectsPageContent: ProjectPageContent = {
   seo: {
-    title: "项目 | 方贺进",
+    title: "项目 | Westwoods",
     description: "大模型推理、性能建模与 LLMOps 项目。",
     image: identity.logo,
   },
@@ -153,7 +148,7 @@ export const projectsPageContent: ProjectPageContent = {
 // Blog (/blog)
 export const blogPageContent: BlogPageContent = {
   seo: {
-    title: "文章 | 方贺进",
+    title: "文章 | Westwoods",
     description: "关于 LLM 系统、性能分析与工程实践的笔记。",
     image: identity.logo,
   },
