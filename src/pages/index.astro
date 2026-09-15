@@ -1,12 +1,16 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { homePageContent } from "../config";
+
+const base = import.meta.env.BASE_URL.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
 ---
 
 <Layout seo={homePageContent.seo}>
   <div class="home page-shell">
     <section class="identity-block" aria-label="Westwoods banner and identity">
-      <img class="identity-banner" src="/banner.png" alt="" aria-hidden="true" />
+      <img class="identity-banner" src={`${base}banner.png`} alt="" aria-hidden="true" />
     </section>
 
     <section class="line-grid intro-grid">
@@ -30,7 +34,7 @@ import { homePageContent } from "../config";
 
     <section class="line-grid profile-grid">
       <article class="line-card system-art-card" aria-label="LLM system illustration">
-        <img class="system-art-image" src="/left_pic.png" alt="Westwoods left picture" />
+        <img class="system-art-image" src={`${base}left_pic.png`} alt="Westwoods left picture" />
       </article>
 
       <article class="line-card info-card">
@@ -38,22 +42,22 @@ import { homePageContent } from "../config";
         <div class="timeline">
           <div class="timeline-item current">
             <span class="timeline-date">2026.09 — now</span>
-            <div class="timeline-content"><div class="timeline-title"><img src="/logos/kuaishou.svg" alt="快手 logo" /><strong>快手</strong></div><span>LLM 训练 Infra 实习生</span></div>
+            <div class="timeline-content"><div class="timeline-title"><img src={`${base}logos/kuaishou.svg`} alt="快手 logo" /><strong>快手</strong></div><span>LLM 训练 Infra 实习生</span></div>
             <span class="timeline-summary">快手多模态大模型基座训练 infra，面向 600B+ 多模态 MoE 大模型训练场景</span>
           </div>
           <div class="timeline-item">
             <span class="timeline-date">2026.08 — 2026.09</span>
-            <div class="timeline-content"><div class="timeline-title"><img src="/logos/vllm.svg" alt="vLLM logo" /><strong>vLLM-Omni</strong></div><span>开源项目二开</span></div>
+            <div class="timeline-content"><div class="timeline-title"><img src={`${base}logos/vllm.svg`} alt="vLLM logo" /><strong>vLLM-Omni</strong></div><span>开源项目二开</span></div>
             <span class="timeline-summary">知名开源推理框架 vLLM 官方社区面向 Any-to-Any 多模态大模型推出的高性能推理与 Serving 框架</span>
           </div>
           <div class="timeline-item">
             <span class="timeline-date">2026.06 — 2026.09</span>
-            <div class="timeline-content"><div class="timeline-title"><img src="/logos/intel.svg" alt="Intel logo" /><strong>Intel</strong></div><span>AI Software Engineer Graduate Intern</span></div>
+            <div class="timeline-content"><div class="timeline-title"><img src={`${base}logos/intel.svg`} alt="Intel logo" /><strong>Intel</strong></div><span>AI Software Engineer Graduate Intern</span></div>
             <span class="timeline-summary">LLM 推理性能建模，预测 LLM 在不同 GPU、TP/PD 配置与推理框架下的部署后的性能表现，支持万级部署配置的快速性能粗排序与不同硬件平台的横向比较。</span>
           </div>
           <div class="timeline-item">
             <span class="timeline-date">2026.04 — 2026.06</span>
-            <div class="timeline-content"><div class="timeline-title"><img src="/logos/centific.png" alt="Centific logo" /><strong>Centific</strong></div><span>LLM Engineer Intern</span></div>
+            <div class="timeline-content"><div class="timeline-title"><img src={`${base}logos/centific.png`} alt="Centific logo" /><strong>Centific</strong></div><span>LLM Engineer Intern</span></div>
             <span class="timeline-summary">数据标注平台 Oneforma 智能助手，协助标注者和客户理解平台服务、理解用户意图，帮助用户提交 jira 工单、上传简历、反馈问题。</span>
           </div>
           <div class="timeline-item">
@@ -68,11 +72,11 @@ import { homePageContent } from "../config";
           </div>
           <div class="timeline-item">
             <span class="timeline-date">2024.09 — 2027.07</span>
-            <div class="timeline-content"><div class="timeline-title"><img src="/logos/jiangnan-mark.png" alt="江南大学校徽" /><strong>江南大学</strong></div><span>软件工程 · 硕士</span></div>
+            <div class="timeline-content"><div class="timeline-title"><img src={`${base}logos/jiangnan-mark.png`} alt="江南大学校徽" /><strong>江南大学</strong></div><span>软件工程 · 硕士</span></div>
           </div>
           <div class="timeline-item">
             <span class="timeline-date">2020.09 — 2024.07</span>
-            <div class="timeline-content"><div class="timeline-title"><img src="/logos/jiangnan-mark.png" alt="江南大学校徽" /><strong>江南大学</strong></div><span>数字媒体技术 · 学士</span></div>
+            <div class="timeline-content"><div class="timeline-title"><img src={`${base}logos/jiangnan-mark.png`} alt="江南大学校徽" /><strong>江南大学</strong></div><span>数字媒体技术 · 学士</span></div>
           </div>
         </div>
       </article>
