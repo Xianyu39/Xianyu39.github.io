@@ -84,7 +84,10 @@ const capabilityExamples = [
 <Layout seo={homePageContent.seo}>
   <div class="home page-shell">
     <section class="identity-block" aria-label="Westwoods banner and identity">
-      <img class="identity-banner" src={`${base}banner.png`} alt="" aria-hidden="true" />
+      <picture>
+        <source srcset={`${base}banner.webp`} type="image/webp" />
+        <img class="identity-banner" src={`${base}banner.png`} alt="" aria-hidden="true" decoding="async" />
+      </picture>
     </section>
 
     <section class="line-grid intro-grid">
@@ -111,7 +114,10 @@ const capabilityExamples = [
 
     <section class="line-grid profile-grid">
       <article class="line-card system-art-card" aria-label="LLM system illustration">
-        <img class="system-art-image" src={`${base}left_pic.png`} alt="Westwoods left picture" />
+        <picture>
+          <source srcset={`${base}left_pic.webp`} type="image/webp" />
+          <img class="system-art-image" src={`${base}left_pic.png`} alt="Westwoods left picture" loading="lazy" decoding="async" />
+        </picture>
       </article>
 
       <article class="line-card info-card">
@@ -234,6 +240,7 @@ const capabilityExamples = [
   .page-shell { width: min(100% - 3rem, 72rem); margin: 0 auto; }
   .home { padding: 4.5rem 0 5rem; }
   .identity-block { position: relative; height: clamp(16rem, 30vw, 24rem); border: 1px solid #d9e1e8; border-radius: .65rem; overflow: hidden; background: #eef2f4; }
+  .identity-block picture, .system-art-card picture { display: block; width: 100%; height: 100%; }
   .identity-banner { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; }
   .line-grid { display: grid; gap: 1rem; margin-top: 1rem; }
   .intro-grid { grid-template-columns: 1.2fr .8fr; }
