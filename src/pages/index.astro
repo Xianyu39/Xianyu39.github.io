@@ -5,6 +5,80 @@ import { homePageContent } from "../config";
 const base = import.meta.env.BASE_URL.endsWith("/")
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
+
+const capabilityStages = [
+  { number: "01", title: "产品设计", subtitle: "Product" },
+  { number: "02", title: "AI 应用开发", subtitle: "Application" },
+  { number: "03", title: "部署 & 运维", subtitle: "LLMOps" },
+  { number: "04", title: "训推框架", subtitle: "Framework" },
+  { number: "05", title: "硬件", subtitle: "Hardware" },
+];
+
+const capabilityExamples = [
+  {
+    position: "top",
+    stage: 1,
+    logo: `${base}logos/sspai.png`,
+    monogram: "少",
+    title: "西郊次生林",
+    description: "少数派 2025 年度作者 · 百万阅读",
+    href: "https://sspai.com/u/05c3mst0/updates",
+  },
+  {
+    position: "top",
+    stage: 2,
+    logo: null,
+    monogram: "食",
+    title: "食养一点通",
+    description: "食品健康咨询 AI 应用",
+    href: null,
+  },
+  {
+    position: "bottom",
+    stage: 2,
+    logo: `${base}logos/centific.png`,
+    monogram: "C",
+    title: "OneForma 智能助手",
+    description: "意图理解与智能工作流应用",
+    href: null,
+  },
+  {
+    position: "top",
+    stage: 3,
+    logo: null,
+    monogram: "S",
+    title: "Squeeze LLMOps",
+    description: "异构 GPU 集群上的模型服务平台",
+    href: null,
+  },
+  {
+    position: "bottom",
+    stage: 4,
+    logo: `${base}logos/vllm.svg`,
+    monogram: "V",
+    title: "vLLM-Omni",
+    description: "多模态模型推理与 Serving 框架",
+    href: null,
+  },
+  {
+    position: "top",
+    stage: 4,
+    logo: `${base}logos/kuaishou.svg`,
+    monogram: "K",
+    title: "大模型训练 Infra",
+    description: "600B+ 多模态 MoE 训练场景",
+    href: null,
+  },
+  {
+    position: "bottom",
+    stage: 5,
+    logo: `${base}logos/intel.svg`,
+    monogram: "I",
+    title: "LLM 性能建模",
+    description: "跨 GPU 与部署配置的性能预测",
+    href: null,
+  },
+];
 ---
 
 <Layout seo={homePageContent.seo}>
@@ -17,7 +91,10 @@ const base = import.meta.env.BASE_URL.endsWith("/")
       <article class="line-card intro-card">
         <p class="card-label">About</p>
         <h2>👋 Hi, I am Westwoods.</h2>
-        <p class="about-lead">Nice to meet you. Feel free to explore my workspace.</p>
+        <p class="about-lead">
+          我专注于 <span class="meaningful">AI Infra</span>，但我也是一个
+          <span class="meaningful">真正意义</span>上的「<strong class="ai-full-stack">AI 全栈工程师</strong>」。
+        </p>
         <div class="about-roles">
           <span>AI Infra Engineer</span>
           <span>Full Stack Developer</span>
@@ -73,13 +150,82 @@ const base = import.meta.env.BASE_URL.endsWith("/")
           <div class="timeline-item">
             <span class="timeline-date">2024.09 — 2027.07</span>
             <div class="timeline-content"><div class="timeline-title"><img src={`${base}logos/jiangnan-mark.png`} alt="江南大学校徽" /><strong>江南大学</strong></div><span>软件工程 · 硕士</span></div>
+            <span class="timeline-summary">人工智能 · LLM & 知识图谱推理方向</span>
           </div>
           <div class="timeline-item">
             <span class="timeline-date">2020.09 — 2024.07</span>
             <div class="timeline-content"><div class="timeline-title"><img src={`${base}logos/jiangnan-mark.png`} alt="江南大学校徽" /><strong>江南大学</strong></div><span>数字媒体技术 · 学士</span></div>
+            <span class="timeline-summary">游戏 · 引擎 & 图形渲染方向</span>
           </div>
         </div>
       </article>
+    </section>
+
+    <section class="line-card capability-card" aria-labelledby="capability-title">
+      <div class="capability-heading">
+        <div>
+          <p class="card-label">AI FULL-STACK SPECTRUM</p>
+          <h2 id="capability-title">从产品 idea，到每一次计算</h2>
+        </div>
+        <p>我的经历分布</p>
+      </div>
+
+      <div class="capability-scroll" tabindex="0" aria-label="横向滚动查看 AI 全栈能力光谱">
+        <div class="capability-map">
+          <div class="experience-row experience-row-top">
+            {capabilityExamples.filter((item) => item.position === "top").map((item) => (
+              <article class="experience-chip" style={`--stage: ${item.stage}`}>
+                <div class="experience-logo">
+                  {item.logo ? <img src={item.logo} alt="" /> : <span>{item.monogram}</span>}
+                </div>
+                <div>
+                  <strong>
+                    {item.href ? (
+                      <a class="experience-link" href={item.href} target="_blank" rel="noreferrer">
+                        {item.title}<span aria-hidden="true">↗</span>
+                      </a>
+                    ) : item.title}
+                  </strong>
+                  <p>{item.description}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div class="spectrum-axis" aria-label="产品设计到硬件的六层能力路径">
+            <div class="spectrum-line" aria-hidden="true"></div>
+            {capabilityStages.map((stage) => (
+              <div class="spectrum-stage">
+                <span class="stage-node" aria-hidden="true"></span>
+                <span class="stage-number">{stage.number}</span>
+                <strong>{stage.title}</strong>
+                <small>{stage.subtitle}</small>
+              </div>
+            ))}
+          </div>
+
+          <div class="experience-row experience-row-bottom">
+            {capabilityExamples.filter((item) => item.position === "bottom").map((item) => (
+              <article class="experience-chip" style={`--stage: ${item.stage}`}>
+                <div class="experience-logo">
+                  {item.logo ? <img src={item.logo} alt="" /> : <span>{item.monogram}</span>}
+                </div>
+                <div>
+                  <strong>
+                    {item.href ? (
+                      <a class="experience-link" href={item.href} target="_blank" rel="noreferrer">
+                        {item.title}<span aria-hidden="true">↗</span>
+                      </a>
+                    ) : item.title}
+                  </strong>
+                  <p>{item.description}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+      <p class="capability-note"><span aria-hidden="true">↳</span> 这不是一张“都会”的清单，而是我持续向下理解、向上交付的技术路径。</p>
     </section>
   </div>
 </Layout>
@@ -97,7 +243,9 @@ const base = import.meta.env.BASE_URL.endsWith("/")
   .line-card h2 { margin: .8rem 0 .7rem; font-size: clamp(1.35rem, 2.6vw, 2.2rem); line-height: 1.2; letter-spacing: -.045em; }
   .line-card p:not(.card-label):not(.motto):not(.motto-detail) { color: #667585; line-height: 1.75; }
   .intro-card > p:not(.card-label) { max-width: 40rem; }
-  .about-lead { margin-bottom: .65rem; }
+  .about-lead { margin-bottom: .65rem; font-size: 1.02rem; }
+  .meaningful { background: linear-gradient(transparent 58%, rgba(230, 190, 79, .38) 58% 92%, transparent 92%); }
+  .ai-full-stack { display: inline-block; color: #087b83; background: linear-gradient(110deg, #087b83 10%, #205b83 92%); background-clip: text; font-size: 1.16em; font-weight: 750; letter-spacing: -.035em; -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
   .about-roles { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: 1.1rem; }
   .about-roles span { padding: .43rem .58rem; border: 1px solid #cbdde1; border-radius: .35rem; color: #0b7b83; background: #f4fbfb; font-size: .72rem; }
   .about-note { margin-top: 1.2rem; }
@@ -123,8 +271,47 @@ const base = import.meta.env.BASE_URL.endsWith("/")
   .timeline-summary { color: #667585; font-size: .75rem; line-height: 1.5; }
   .system-art-card { min-height: 100%; padding: 0; overflow: hidden; }
   .system-art-image { display: block; width: 100%; height: 100%; min-height: 28rem; object-fit: cover; object-position: center; }
+  .capability-card { margin-top: 1rem; padding: 1.7rem 1.55rem 1.35rem; overflow: hidden; }
+  .capability-heading { display: flex; align-items: end; justify-content: space-between; gap: 2rem; }
+  .capability-heading h2 { margin: .7rem 0 0; }
+  .capability-heading > p { max-width: 16rem; margin: 0 0 .2rem; color: #8b98a6 !important; font: .72rem/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; text-align: right; }
+  .capability-scroll { margin: 1.6rem -1.55rem 0; padding: 0 1.55rem .5rem; overflow-x: auto; scrollbar-color: #cbdde1 transparent; scrollbar-width: thin; }
+  .capability-map { position: relative; display: grid; grid-template-rows: 7.2rem auto 7.2rem; width: 100%; min-width: 56rem; }
+  .experience-row, .spectrum-axis { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); column-gap: .75rem; }
+  .experience-row { position: relative; }
+  .experience-chip { position: relative; grid-column: var(--stage); display: grid; grid-template-columns: 2rem minmax(0, 1fr); gap: .62rem; align-self: start; min-height: 4.75rem; padding: .7rem; border: 1px solid #dce5e9; border-radius: .5rem; background: #fbfcfd; box-shadow: 0 .5rem 1.2rem rgba(23, 32, 43, .035); }
+  .experience-row-top .experience-chip { align-self: end; margin-bottom: .9rem; }
+  .experience-row-bottom .experience-chip { margin-top: .9rem; }
+  .experience-chip::after { position: absolute; left: 50%; width: 1px; height: .95rem; background: #b9cfd2; content: ""; }
+  .experience-row-top .experience-chip::after { top: 100%; }
+  .experience-row-bottom .experience-chip::after { bottom: 100%; }
+  .experience-logo { display: grid; place-items: center; width: 2rem; height: 2rem; overflow: hidden; border: 1px solid #d8e3e6; border-radius: .42rem; background: #fff; color: #0b7b83; font: 700 .78rem/1 ui-monospace, monospace; }
+  .experience-logo img { display: block; width: 1.45rem; height: 1.45rem; object-fit: contain; }
+  .experience-logo img[src*="intel"] { width: 1.7rem; }
+  .experience-chip > div:last-child { min-width: 0; }
+  .experience-chip strong { display: block; overflow: hidden; color: #283540; font-size: .72rem; font-weight: 650; line-height: 1.35; text-overflow: ellipsis; white-space: nowrap; }
+  .experience-link { color: inherit; }
+  .experience-link::before { position: absolute; inset: 0; border-radius: inherit; content: ""; }
+  .experience-link span { margin-left: .2rem; color: #0b7b83; font-size: .62rem; }
+  .experience-chip:has(.experience-link) { border-color: #cbdde1; background: #f8fcfc; transition: border-color 180ms ease, background 180ms ease, transform 180ms ease; }
+  .experience-chip:has(.experience-link):hover { border-color: #0b9ba0; background: #f2fbfb; transform: translateY(-1px); }
+  .experience-chip p { display: -webkit-box; margin: .22rem 0 0; overflow: hidden; color: #788694 !important; font-size: .62rem; line-height: 1.42 !important; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+  .spectrum-axis { position: relative; min-height: 5.25rem; }
+  .spectrum-line { position: absolute; top: .55rem; right: 10%; left: 10%; height: 2px; background: linear-gradient(90deg, #d9ae45 0%, #62aaa4 48%, #31749b 100%); }
+  .spectrum-line::after { position: absolute; top: -3px; right: -1px; width: 0; height: 0; border-top: 4px solid transparent; border-bottom: 4px solid transparent; border-left: 7px solid #31749b; content: ""; }
+  .spectrum-stage { position: relative; display: flex; align-items: center; flex-direction: column; padding-top: 1.35rem; text-align: center; }
+  .stage-node { position: absolute; top: .26rem; left: 50%; width: .66rem; height: .66rem; border: 2px solid #fff; border-radius: 50%; background: #55999c; box-shadow: 0 0 0 1px #77acaf; transform: translateX(-50%); }
+  .spectrum-stage:nth-of-type(2) .stage-node { background: #d4a63f; box-shadow: 0 0 0 1px #ddbd72; }
+  .spectrum-stage:nth-of-type(3) .stage-node { background: #9bac67; box-shadow: 0 0 0 1px #b1c083; }
+  .spectrum-stage:nth-of-type(5) .stage-node { background: #3d879c; box-shadow: 0 0 0 1px #72a7b5; }
+  .spectrum-stage:nth-of-type(6) .stage-node { background: #31749b; box-shadow: 0 0 0 1px #6d9db9; }
+  .stage-number { color: #9ba7b2; font: .56rem/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .08em; }
+  .spectrum-stage strong { margin-top: .22rem; color: #33424f; font-size: .73rem; font-weight: 650; }
+  .spectrum-stage small { margin-top: .15rem; color: #9aa5af; font: .56rem/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; text-transform: uppercase; }
+  .capability-note { margin: .15rem 0 0; color: #7d8b97 !important; font-size: .68rem; }
+  .capability-note span { margin-right: .4rem; color: #0b7b83; }
   .connect-line { margin-top: 5.5rem; padding-top: 1.2rem; border-top: 1px solid #d9e1e8; color: #667585; }
   @media (max-width: 980px) { .profile-grid { grid-template-columns: 1fr 1.45fr; } }
-  @media (max-width: 760px) { .page-shell { width: min(100% - 2rem, 42rem); } .intro-grid, .equal-grid, .profile-grid { grid-template-columns: 1fr; } }
-  @media (max-width: 520px) { .home { padding-top: 2.5rem; } .identity-block { height: 22rem; } .line-card { padding: 1.25rem; } .system-art-card { min-height: 24rem; } .section-heading { align-items: flex-start; flex-direction: column; } .timeline-item { grid-template-columns: 1fr; gap: .2rem; } }
+  @media (max-width: 760px) { .page-shell { width: min(100% - 2rem, 42rem); } .intro-grid, .equal-grid, .profile-grid { grid-template-columns: 1fr; } .capability-heading { align-items: flex-start; flex-direction: column; gap: .45rem; } .capability-heading > p { text-align: left; } .capability-scroll { margin-right: -1.25rem; padding-right: 1.25rem; } }
+  @media (max-width: 520px) { .home { padding-top: 2.5rem; } .identity-block { height: 22rem; } .line-card { padding: 1.25rem; } .system-art-card { min-height: 24rem; } .section-heading { align-items: flex-start; flex-direction: column; } .timeline-item { grid-template-columns: 1fr; gap: .2rem; } .about-lead { font-size: .96rem; } .capability-card { padding-bottom: 1.1rem; } .capability-scroll { margin-left: -1.25rem; } }
 </style>
