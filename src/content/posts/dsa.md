@@ -1,6 +1,6 @@
 ---
 title: "DSA：稀疏注意力与推理优化"
-pubDate: 2026-09-17
+pubDate: 2026-06-25
 description: "讨论 DSA、Lightning Indexer、细粒度 token 选择及其在推理系统中的实现思路."
 author: "Westwoods"
 tags: [LLM, Attention, AI Infra]

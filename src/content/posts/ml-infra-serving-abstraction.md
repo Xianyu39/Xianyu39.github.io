@@ -1,6 +1,6 @@
 ---
 title: "ML Infra 推理服务抽象模型"
-pubDate: 2026-09-17
+pubDate: 2025-12-23
 description: "从管理平面、控制平面和数据平面理解机器学习推理服务的抽象结构。"
 author: "Westwoods"
 tags: [ML Infra, 推理服务, 系统设计]

@@ -1,6 +1,6 @@
 ---
 title: "llama.cpp"
-pubDate: 2026-09-17
+pubDate: 2025-07-10
 description: "记录 llama.cpp 的构建、GGUF 转换、量化、推理和镜像构建。"
 author: "Westwoods"
 tags: [llama.cpp, LLM, 部署]

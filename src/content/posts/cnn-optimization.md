@@ -1,6 +1,6 @@
 ---
 title: "卷积神经网络优化"
-pubDate: 2026-09-17
+pubDate: 2026-08-19
 description: "整理 im2col、GEMM 和卷积实现中的计算优化方法。"
 author: "Westwoods"
 tags: [深度学习, 模型优化]

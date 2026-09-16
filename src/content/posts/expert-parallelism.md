@@ -1,6 +1,6 @@
 ---
 title: "专家并行"
-pubDate: 2026-09-17
+pubDate: 2026-06-08
 description: "介绍 MoE 模型中的专家并行、token dispatch、All-to-All 通信和不同并行组合。"
 author: "Westwoods"
 tags: [MoE, 分布式计算, AI Infra]

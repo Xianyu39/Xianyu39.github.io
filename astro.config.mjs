@@ -14,6 +14,9 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [remarkReadingTime, remarkMath],
     rehypePlugins: [rehypeKatex],
+    shikiConfig: {
+      theme: "github-light",
+    },
   },
 
   vite: {

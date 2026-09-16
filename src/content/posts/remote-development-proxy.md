@@ -1,6 +1,6 @@
 ---
 title: "远程开发代理"
-pubDate: 2026-09-17
+pubDate: 2025-05-22
 description: "用 SSH 连接远程服务器进行开发时，可以让服务器使用本机上的代理。"
 author: "Westwoods"
 tags: [开发工具, SSH, 网络]

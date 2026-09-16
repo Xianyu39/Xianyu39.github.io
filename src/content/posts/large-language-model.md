@@ -1,6 +1,6 @@
 ---
 title: "大语言模型"
-pubDate: 2026-09-17
+pubDate: 2025-01-14
 description: "从预训练、微调和对齐等方面整理大语言模型的基本原理与应用。"
 author: "Westwoods"
 tags: [LLM, 基础模型]

@@ -1,6 +1,6 @@
 ---
 title: "混合专家架构"
-pubDate: 2026-09-17
+pubDate: 2025-11-06
 description: "混合专家架构是一种节能架构，目标是减少参与计算的参数量，从而实现训练和推理的降本增效。"
 author: "Westwoods"
 tags: [LLM, 模型架构]

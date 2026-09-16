@@ -1,6 +1,6 @@
 ---
 title: "vLLM"
-pubDate: 2026-09-17
+pubDate: 2023-11-15
 description: "记录 vLLM 的安装、推理服务、参数调优、分布式推理和性能分析。"
 author: "Westwoods"
 tags: [vLLM, LLM, 部署]

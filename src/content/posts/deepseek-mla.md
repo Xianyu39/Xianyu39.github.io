@@ -1,6 +1,6 @@
 ---
 title: "DeepSeek MLA"
-pubDate: 2026-09-17
+pubDate: 2026-06-22
 description: "MLA 是继承 Attention GQA 之后的又一个 KV-Cache 优化技术。"
 author: "Westwoods"
 tags: [LLM, AI Infra, KV-Cache]

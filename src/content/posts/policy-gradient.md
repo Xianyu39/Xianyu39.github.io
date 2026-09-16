@@ -1,6 +1,6 @@
 ---
 title: "策略梯度"
-pubDate: 2026-09-17
+pubDate: 2025-02-17
 description: "从策略梯度的基本公式出发，整理模型、训练过程、优缺点以及 LLM 中的应用。"
 author: "Westwoods"
 tags: [强化学习, LLM]

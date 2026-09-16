@@ -1,6 +1,6 @@
 ---
 title: "增强检索生成"
-pubDate: 2026-09-17
+pubDate: 2024-10-23
 description: "增强检索生成由 Retriever 和 Reader 组成，一般用于问题回答、事实验证等任务。"
 author: "Westwoods"
 tags: [RAG, LLM, 知识工程]

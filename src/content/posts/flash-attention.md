@@ -1,6 +1,6 @@
 ---
 title: "Flash Attention"
-pubDate: 2026-09-17
+pubDate: 2026-03-16
 description: "从缩放点积注意力出发，理解 Flash Attention 如何减少中间矩阵存储和显存读写。"
 author: "Westwoods"
 tags: [AI Infra, Attention]
