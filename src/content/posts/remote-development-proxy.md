@@ -1,53 +1,46 @@
 ---
-title: "用 SSH 反向隧道共享本机代理"
+title: "远程开发代理"
 pubDate: 2026-09-17
-description: "远程开发时，让服务器通过 SSH 安全使用本机代理，并说明 LAN 暴露和端口转发的区别。"
+description: "来自 only-notes 的原始笔记，保留原文内容并做网页格式适配。"
 author: "Westwoods"
 tags: [开发工具, SSH, 网络]
 draft: false
 ---
 
-远程服务器经常需要访问代码仓库、模型仓库或软件源。直接在服务器上安装代理会增加维护成本，多用户机器还可能把代理端口暴露给其他用户。一个更安全的思路是：代理运行在本机，服务器通过 SSH 隧道把流量转回本机。
+用 SSH 连接远程服务器进行开发的时候经常会遇到需要访问外部网络的情况，但是在服务器上安装代理软件（比如 clash）往往不太方便，而且还会导致你要维护多个的代理。此外，如果是多用户系统的话，在服务器上启动代理也不够安全，其他用户通过 `localhost` 就能访问你的代理服务器，导致你的流量可能为大家所共享。
 
-## 方案一：LAN 代理
-
-如果本机代理软件允许局域网连接，可以在服务器上把代理地址指向 SSH 客户端地址：
-
-```bash
-export http_proxy="http://${SSH_CLIENT%% *}:7890"
-export https_proxy="http://${SSH_CLIENT%% *}:7890"
+为了解决这个问题，我们可以考虑**让服务器使用本机上的代理**。这一共有两种方式。
+# LAN
+打开 Clash 的 LAN 选项，允许代理端口被远程接入，这样服务器就可以把流量发回本机的代理程序。使用 ssh 登录后，`SSH_CLIENT` 这一环境变量会记录本机 ip 地址，因此只需要将代理设置为：
+```shell
+export http_proxy=http://$SSH_CLIENT:7890
+export https_proxy=http://$SSH_CLIENT:7890
 ```
+即可。
 
-这种方式配置简单，但代理端口会暴露在局域网中。除非明确配置访问控制和鉴权，否则不建议在公共网络或多人环境中使用。
+但是这有一个问题：你的代理程序端口暴露在子网上，而且没有任何鉴权机制，可能会引发安全问题。
+# SSH 隧道
+SSH 有建立隧道的功能，即允许本机和服务器建立安全的连接，互相映射端口。我们可以**将本机的 7890 端口通过 SSH 映射到服务器上**来实现代理。
 
-## 方案二：SSH 反向隧道
+SSH 有 `-L` 和 `-R` 两个参数，这两个参数都可以进行端口转发，但是作用有不同：
+1. `-L`：local，把服务器的端口转发到本地； `ssh -L port1:localhost:port2` 的意思是将服务器的 `port2` 映射到本地 `port1`，是**将本机流量转发到服务器**；
+2. `-R`：remote，把本地的端口转发到服务器； `ssh -R port1:localhost:port2` 的意思是将本机的 `port2` 映射到服务器的 `port1`，是**将服务器流量转发到本机**。
 
-通过 `-R`，可以把本机的代理端口映射到服务器：
+> 这个端口参数看起来很奇怪，可以记忆为 `[src_ip:src_port]:[dest_ip:dest_port]`。SSH 做的始终都是将 `src` 处的流量转发到 `dest` 处。
 
-```bash
+于是我们可以修改一下登录命令：
+```shell
 ssh -R 7890:localhost:7890 user@server
 ```
+这样登录的同时就完成了端口映射。
 
-登录后，服务器访问自己的 `localhost:7890`，实际流量会通过 SSH 隧道到达本机的 7890 端口。服务器上的环境变量可以这样设置：
-
-```bash
-export http_proxy=http://127.0.0.1:7890
-export https_proxy=http://127.0.0.1:7890
-export no_proxy=127.0.0.1,localhost
+多个端口映射还可以叠用，比如：
+```shell
+ssh  -L 8888:localhost:9000 -R 7890:localhost:7890 user@server
 ```
-
-如果需要同时转发其他端口，可以叠加参数，例如：
-
-```bash
-ssh -L 8888:localhost:9000 -R 7890:localhost:7890 user@server
-```
-
-## 常见问题
-
-`-L` 是把远端服务映射到本机，`-R` 是把本机服务映射到远端。隧道断开后代理自然失效，可以使用 `ServerAliveInterval` 和 `ServerAliveCountMax` 减少长连接无声断开的情况。
-
-不要把代理端口绑定到 `0.0.0.0`，不要把 token 或密码写入脚本，也不要在不可信服务器上使用未经审计的代理配置。完成工作后可以执行：
-
-```bash
-unset http_proxy https_proxy HTTP_PROXY HTTPS_PROXY
+# 调用
+可以在 `~/.bashrc` 中添加命令来方便启动和关闭代理：
+```shell
+alias proxyon='export http_proxy=http://localhost:7890 && export https_proxy=http://localhost:7890'
+alias proxyoff='unset http_proxy && unset https_proxy'
 ```

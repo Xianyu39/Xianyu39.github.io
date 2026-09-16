@@ -1,44 +1,35 @@
 ---
-title: "Hugging Face 模型部署：从下载到推理"
+title: "使用hugging face部署大模型"
 pubDate: 2026-09-17
-description: "整理 Hugging Face 模型下载、显存不足处理和推理服务选择中的几个实用原则。"
+description: "来自 only-notes 的原始笔记，保留原文内容并做网页格式适配。"
 author: "Westwoods"
 tags: [Hugging Face, LLM, 部署]
 draft: false
 ---
 
-Hugging Face Transformers 覆盖了模型下载、加载、微调和推理的完整流程。实际部署时，最容易出问题的地方通常不是调用 API，而是模型权限、权重下载、显存规划和服务化方式。
+用hugging face部署大模型来实现微调和训练是一个很好的选择。本文记录一些使用经验。
+# 部署相关问题
+Hugging Face（以下简称 hf）这套框架很完整，从下载模型、训练、微调到发布，什么都有。
 
-## 安全登录与下载
+现在 hf 下载模型是需要权限的，所以务必先去网站上注册账号，获取一个验证 token 过来。这个 token 不要写在代码里，在命令行用 `huggingface-cli` 命令 `login` 输入 token 就可以表明自己的身份的同时避免 token 泄露。除了这个，也可以把 token 写在环境变量里面。
 
-需要权限的模型应先在 Hugging Face 网页完成授权，再使用 CLI 登录。token 不要写进代码或提交到 Git：
+虽然著名的 `from_pretrained` 方法会自动下载模型，但是由于 hf 在国外，下载模型也难免被墙的命运，所以最好还是手动下载。手动下载方法包括：
+1. 去网页手动下载（免登录）
+	1. 可以使用 IDM、Aria 2 多线程下载，很快[^1]
+2. `git clone`，但是下载断了就要重新下载，巨慢，还会下载多余的历史版本
+3. `huggingface-cli download`，好用，支持断点续传，但是断了需要手动恢复
+	1. 下载 `hf_transfer` 可以让 `huggingface-cli` 支持多线程下载[^1]，需要设置环境变量 `HF_HUB_ENABLE_HF_TRANSFER=1` 来开启；**这个方法只允许从官方网站下载内容**
+4. `snapshot_download`，这是最好的，还可以选择性下载，但是设置比较复杂
+5. 镜像网站 `https://hf-mirror.com`，设置环境变量 `HF_ENDPOINT` 为镜像站就好了
+6. HFD：有大佬提供的下载脚本 [CLI-Tool for download Huggingface models and datasets with aria2/wget: hfd](https://gist.github.com/padeoe/697678ab8e528b85a2a7bddafea1fa4f#file-hfd-sh)，脚本不依赖 huggingface-cli 以及 python，可以使用 aria 2 以及 wget 等下载 huggingface 模型，而且允许加速下载镜像网站的模型；但是这个脚本只能用于 Linux/MacOS
+# 推理问题
+测试了一下，qwen 2.5-8 b-instruct 在 hf 里面需要约莫 30 G 显存才能实现 GPU 加速推理，单张显卡是不够的。但是很走运的是 hf 贴心地弄了一个 `accelerate` 库用于自动把模型分配到不同的 GPU 上实现推理。如果显存还是不够，可以考虑：
+1. 降低参数精度：参数占据了绝大多数内存，考虑换成 16 位甚至 8 位浮点数，hf 有 `bitsandbytes` 供你实现这个目的
+2. 把部分参数存在硬盘上交给 CPU 处理（设置 `offload_folder` 和 `offload_state_dict` 两个参数）
+3. 减小输入长度
 
-```bash
-hf auth login
-```
+输入不会自动分配到 GPU 上面，要记得使用 `input.to(model.device)`，或者手动把输入放到模型第一层（输入层所在的 GPU 上面）
+## vLLM
+原生 HuggingFace Transformer 效率非常低下，而 vLLM 则可以无缝嵌入到 HF 代码中并且将效率拉到最高。
 
-下载模型时，优先使用支持断点续传和缓存的方式：
-
-```bash
-hf download Qwen/Qwen2.5-7B-Instruct --local-dir ./models/qwen2.5-7b
-```
-
-在 Python 中也可以使用 `snapshot_download`，并通过 `local_dir` 或缓存目录管理文件。生产环境应固定模型版本或 commit，避免同一个服务在不同时间拉到不同权重。
-
-## 显存不够怎么办
-
-显存预算首先取决于参数量和权重精度。除了降低精度，还要把 KV-Cache、激活、临时 workspace 和 batch 预留出来。常见手段包括：
-
-- 使用 FP16 或 BF16 权重；
-- 使用 8-bit 或 4-bit 量化；
-- 通过 `device_map` 或 Accelerate 将模型切分到多张 GPU；
-- 限制上下文长度和 batch size；
-- 对不常用的参数启用 CPU offload，但要接受更高延迟。
-
-例如，使用 Transformers 加载时应确保输入和模型位于正确设备上；模型被切分到多卡时，不要简单地把输入固定到一张与 embedding 不匹配的 GPU。
-
-## 从 Transformers 到推理服务
-
-Transformers 适合验证模型和开发原型。高并发服务通常会进一步使用 vLLM、SGLang 等推理引擎，它们会提供连续 batching、PagedAttention、KV-Cache 管理和更高效的调度。
-
-选择部署方案时，不要只比较单次生成速度，还要测首 token 延迟、单 token 延迟、吞吐、显存峰值、并发稳定性和服务成本。模型能跑起来只是第一步，能在目标负载下稳定运行才是部署完成。
+[^1]: https://zhuanlan.zhihu.com/p/663712983?s_r=0
