@@ -106,11 +106,21 @@ const capabilityExamples = [
         </div>
         <p>📮 Contact Me: <a class="contact-email" href="mailto:westwoods342@foxmail.com">westwoods342@foxmail.com</a></p>
       </article>
-      <article class="line-card motto-card">
-        <p class="card-label">Motto</p>
-        <p class="motto">A good system is not just fast.</p>
-        <p class="motto-detail">It is <strong>observable</strong>, reproducible, and kind to the next engineer.</p>
-      </article>
+      <div class="intro-side-stack">
+        <article class="line-card motto-card">
+          <p class="card-label">Motto</p>
+          <p class="motto">A good system is not just fast.</p>
+          <p class="motto-detail">It is <strong>observable</strong>, reproducible, and kind to the next engineer.</p>
+        </article>
+        <a class="line-card article-entry-card" href={`${base}blog/`}>
+          <div>
+            <p class="card-label">Articles</p>
+            <h2>文章</h2>
+            <p>记录 LLM 系统、性能分析与工程实践。</p>
+          </div>
+          <span class="article-entry-link">进入文章 <span aria-hidden="true">↗</span></span>
+        </a>
+      </div>
     </section>
 
     <section class="line-grid profile-grid">
@@ -243,7 +253,8 @@ const capabilityExamples = [
   .identity-block picture, .system-art-card picture { display: block; width: 100%; height: 100%; }
   .identity-banner { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; }
   .line-grid { display: grid; gap: 1rem; margin-top: 1rem; }
-  .intro-grid { grid-template-columns: 1.2fr .8fr; }
+  .intro-grid { grid-template-columns: 1.2fr .8fr; align-items: stretch; }
+  .intro-side-stack { display: grid; grid-template-rows: repeat(2, minmax(0, 1fr)); gap: 1rem; min-height: 100%; }
   .equal-grid { grid-template-columns: 1fr 1fr; }
   .profile-grid { grid-template-columns: 1fr 2fr; align-items: stretch; }
   .line-card { padding: 1.55rem; border: 1px solid #d9e1e8; border-radius: .65rem; background: #fff; }
@@ -263,6 +274,11 @@ const capabilityExamples = [
   .motto { margin: 2.2rem 0 .6rem; color: #0b7b83; font: 500 clamp(1.25rem, 2.5vw, 1.75rem)/1.35 Georgia, serif; }
   .motto-detail { margin: 0; color: #667585; line-height: 1.7; }
   .motto-detail strong { color: #0b7b83; font-weight: 600; }
+  .article-entry-card { display: flex; flex-direction: column; justify-content: space-between; color: inherit; transition: border-color .2s ease, transform .2s ease; }
+  .article-entry-card:hover { border-color: #0b9ba0; transform: translateY(-2px); }
+  .article-entry-card h2 { margin: .65rem 0 .4rem; }
+  .article-entry-card p:not(.card-label) { margin: 0; color: #667585; line-height: 1.65; }
+  .article-entry-link { align-self: flex-end; margin-top: 1rem; color: #0b7b83; font-size: .78rem; }
   .info-card h2 { margin-top: 1.4rem; font-size: 1.3rem; }
   .info-card > p:not(.card-label):not(.muted) { margin: 0; }
   .muted { color: #8b98a6 !important; font-size: .86rem; }
