@@ -8,14 +8,13 @@ const postsCollection = defineCollection({
   loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/posts" }),
   schema: z.object({
     title: z.string(),
-    pubDate: z.date(),
+    pubDate: z.coerce.date(),
+    updatedDate: z.coerce.date().optional(),
     description: z.string(),
-    author: z.string(),
-    image: z.object({
-      url: z.string(),
-      alt: z.string(),
-    }),
-    readingTime: z.number().optional(),
+    author: z.string().default("Westwoods"),
+    tags: z.array(z.string()).default([]),
+    image: z.string().optional(),
+    draft: z.boolean().default(false),
   }),
 });
 // Export a single `collections` object to register your collection(s)

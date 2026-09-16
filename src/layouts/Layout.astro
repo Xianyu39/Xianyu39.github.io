@@ -29,7 +29,8 @@ const base = import.meta.env.BASE_URL.endsWith("/")
       <slot />
     </main>
     <footer class="site-footer">
-      <span>© {new Date().getFullYear()} Westwoods</span><span>Built with Astro</span>
+      <span>© {new Date().getFullYear()} Westwoods</span>
+      <span><a href={`${base}blog/`}>文章</a> · Built with Astro</span>
     </footer>
   </body>
 </html>
