@@ -10,7 +10,10 @@ const assetPath = (path: string) =>
   path.startsWith("http") ? path : `${base}${path.replace(/^\/+/, "")}`;
 
 export async function getStaticPaths() {
-  const posts = await getCollection("posts");
+  const posts = await getCollection(
+    "posts",
+    ({ data }) => import.meta.env.DEV || !data.draft,
+  );
   return posts.map((entry) => ({ params: { id: entry.id }, props: { entry } }));
 }
 
@@ -19,6 +22,31 @@ const { entry } = Astro.props;
 const { Content,  remarkPluginFrontmatter} = await render(entry);
 const cover = assetPath(entry.data.image ?? "banner.png");
 const readingTime = Math.max(1, Math.ceil(Number(remarkPluginFrontmatter.minutesRead ?? 1)));
+const siteUrl = Astro.site?.href ?? "https://xianyu39.github.io/";
+const articleUrl = new URL(`${base}blog/${entry.id}/`, siteUrl).href;
+const articleStructuredData = [
+  {
+    "@type": "BlogPosting",
+    "@id": `${articleUrl}#article`,
+    mainEntityOfPage: { "@id": `${articleUrl}#webpage` },
+    headline: entry.data.title,
+    description: entry.data.description,
+    image: new URL(cover, siteUrl).href,
+    datePublished: entry.data.pubDate.toISOString(),
+    dateModified: (entry.data.updatedDate ?? entry.data.pubDate).toISOString(),
+    author: { "@id": `${siteUrl}#person` },
+    keywords: entry.data.tags,
+    inLanguage: "zh-CN",
+  },
+  {
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "首页", item: new URL(base, siteUrl).href },
+      { "@type": "ListItem", position: 2, name: "文章", item: new URL(`${base}blog/`, siteUrl).href },
+      { "@type": "ListItem", position: 3, name: entry.data.title, item: articleUrl },
+    ],
+  },
+];
 ---
 
   <Layout
@@ -26,7 +54,11 @@ const readingTime = Math.max(1, Math.ceil(Number(remarkPluginFrontmatter.minutes
     title: entry.data.title,
     description: entry.data.description,
     image: cover,
+    type: "article",
+    publishedTime: entry.data.pubDate.toISOString(),
+    modifiedTime: (entry.data.updatedDate ?? entry.data.pubDate).toISOString(),
   }}
+  structuredData={articleStructuredData}
   >
   <article class="article-shell">
     <a class="article-back" href={`${base}blog/`}>← 所有文章</a>

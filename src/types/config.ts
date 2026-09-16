@@ -21,7 +21,12 @@ export type SEOInfo = {
   title: string;
   description: string;
   image: string;
+  type?: "website" | "article";
+  publishedTime?: string;
+  modifiedTime?: string;
 };
+
+export type StructuredData = Record<string, unknown>;
 
 export type HomePageContent = {
   seo: SEOInfo;
