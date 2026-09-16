@@ -76,9 +76,9 @@ const readingTime = Math.max(1, Math.ceil(Number(remarkPluginFrontmatter.minutes
   .article-body :global(th) { color: #17202b; background: #eef7f8; font-weight: 650; }
   .article-body :global(hr) { margin: 2rem 0; border: 0; border-top: 1px solid #d9e1e8; }
   .article-body :global(a) { color: #0b7b83; text-decoration: underline; text-underline-offset: .2em; }
-  .article-body :global(code) { padding: .12rem .3rem; border-radius: .25rem; background: #eef2f4; color: #0b7b83; font-size: .9em; }
-  .article-body :global(pre) { overflow-x: auto; margin: 1.4rem 0; padding: 1rem; border-radius: .5rem; background: #17202b; color: #edf3f6; }
-  .article-body :global(pre code) { padding: 0; background: transparent; color: inherit; }
+  .article-body :global(:not(pre) > code) { padding: .12rem .3rem; border-radius: .25rem; background: #eef2f4; color: #0b7b83; font-size: .9em; }
+  .article-body :global(pre) { display: block; overflow-x: auto; margin: 1.4rem 0; padding: 1rem 1.1rem; border: 1px solid #263747; border-radius: .5rem; background: #17202b; color: #edf3f6; font: .88rem/1.65 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; white-space: pre; tab-size: 2; }
+  .article-body :global(pre code) { display: block; padding: 0; background: transparent; color: inherit; font: inherit; white-space: inherit; }
   .article-body :global(blockquote) { margin: 1.4rem 0; padding: .2rem 1rem; border-left: 3px solid #0b9ba0; color: #667585; }
   .article-body :global(img) { max-width: 100%; border-radius: .5rem; }
   .article-bottom-back { margin-top: 3rem; }
