@@ -1,7 +1,7 @@
 ---
 title: "Flash Attention"
 pubDate: 2026-09-17
-description: "来自 only-notes 的原始笔记，保留原文内容并做网页格式适配。"
+description: "从缩放点积注意力出发，理解 Flash Attention 如何减少中间矩阵存储和显存读写。"
 author: "Westwoods"
 tags: [AI Infra, Attention]
 draft: false

@@ -1,7 +1,7 @@
 ---
 title: "命题图谱：知识图谱补充网络的研究"
 pubDate: 2026-09-17
-description: "来自 only-notes 的原始笔记，保留原文内容并做网页格式适配。"
+description: "命题图谱是一种补充知识图谱的结构化知识，用于表示知识与条件之间复杂的上下文依赖。"
 author: "Westwoods"
 tags: [知识图谱, RAG, 研究笔记]
 draft: false

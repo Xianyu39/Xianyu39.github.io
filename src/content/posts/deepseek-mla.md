@@ -1,7 +1,7 @@
 ---
 title: "DeepSeek MLA"
 pubDate: 2026-09-17
-description: "来自 only-notes 的原始笔记，保留原文内容并做网页格式适配。"
+description: "MLA 是继承 Attention GQA 之后的又一个 KV-Cache 优化技术。"
 author: "Westwoods"
 tags: [LLM, AI Infra, KV-Cache]
 draft: false

@@ -1,7 +1,7 @@
 ---
 title: "KV-Cache"
 pubDate: 2026-09-17
-description: "来自 only-notes 的原始笔记，保留原文内容并做网页格式适配。"
+description: "KV-Cache 是一种重要的大语言模型加速推理技术，正是因为有了它，注意力计算才这么高效。"
 author: "Westwoods"
 tags: [LLM, AI Infra, 推理优化]
 draft: false

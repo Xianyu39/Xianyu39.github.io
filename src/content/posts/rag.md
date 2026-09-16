@@ -1,7 +1,7 @@
 ---
 title: "增强检索生成"
 pubDate: 2026-09-17
-description: "来自 only-notes 的原始笔记，保留原文内容并做网页格式适配。"
+description: "增强检索生成由 Retriever 和 Reader 组成，一般用于问题回答、事实验证等任务。"
 author: "Westwoods"
 tags: [RAG, LLM, 知识工程]
 draft: false

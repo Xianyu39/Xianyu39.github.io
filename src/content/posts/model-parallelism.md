@@ -1,7 +1,7 @@
 ---
 title: "模型并行方式"
 pubDate: 2026-09-17
-description: "来自 only-notes 的原始笔记，保留原文内容并做网页格式适配。"
+description: "在多 GPU 以及多结点分布式推理中，模型并行推理和训练主要有流水线并行、张量并行和数据并行。"
 author: "Westwoods"
 tags: [AI Infra, 分布式计算, 深度学习]
 draft: false

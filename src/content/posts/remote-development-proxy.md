@@ -1,7 +1,7 @@
 ---
 title: "远程开发代理"
 pubDate: 2026-09-17
-description: "来自 only-notes 的原始笔记，保留原文内容并做网页格式适配。"
+description: "用 SSH 连接远程服务器进行开发时，可以让服务器使用本机上的代理。"
 author: "Westwoods"
 tags: [开发工具, SSH, 网络]
 draft: false

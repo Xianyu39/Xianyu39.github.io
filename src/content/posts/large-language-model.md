@@ -1,7 +1,7 @@
 ---
 title: "大语言模型"
 pubDate: 2026-09-17
-description: "来自 only-notes 的原始笔记，保留原文内容并做网页格式适配。"
+description: "从预训练、微调和对齐等方面整理大语言模型的基本原理与应用。"
 author: "Westwoods"
 tags: [LLM, 基础模型]
 draft: false

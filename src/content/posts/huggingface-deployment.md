@@ -1,7 +1,7 @@
 ---
 title: "使用hugging face部署大模型"
 pubDate: 2026-09-17
-description: "来自 only-notes 的原始笔记，保留原文内容并做网页格式适配。"
+description: "记录使用 Hugging Face 下载、部署、微调和推理大模型时遇到的一些问题。"
 author: "Westwoods"
 tags: [Hugging Face, LLM, 部署]
 draft: false
