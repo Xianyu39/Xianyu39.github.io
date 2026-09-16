@@ -63,9 +63,18 @@ const readingTime = Math.max(1, Math.ceil(Number(remarkPluginFrontmatter.minutes
   .article-tags span { padding: .25rem .45rem; border: 1px solid #cbdde1; border-radius: .3rem; color: #0b7b83; background: #f4fbfb; font-size: .68rem; }
   .article-cover { display: block; width: 100%; max-height: 25rem; margin: 2rem 0 2.5rem; border-radius: .65rem; object-fit: cover; background: #eef2f4; }
   .article-body { color: #3c4a58; font-size: 1rem; line-height: 1.85; }
+  .article-body :global(h1) { margin: 2.6rem 0 .85rem; color: #17202b; font-size: 1.85rem; line-height: 1.2; letter-spacing: -.035em; }
   .article-body :global(h2) { margin: 2.2rem 0 .75rem; color: #17202b; font-size: 1.55rem; }
   .article-body :global(h3) { margin: 1.8rem 0 .6rem; color: #17202b; font-size: 1.2rem; }
   .article-body :global(p) { margin: 1rem 0; }
+  .article-body :global(ul), .article-body :global(ol) { margin: 1rem 0; padding-left: 1.6rem; }
+  .article-body :global(ul) { list-style: disc; }
+  .article-body :global(ol) { list-style: decimal; }
+  .article-body :global(li) { margin: .35rem 0; padding-left: .2rem; }
+  .article-body :global(table) { display: block; width: 100%; margin: 1.4rem 0; overflow-x: auto; border-collapse: collapse; }
+  .article-body :global(th), .article-body :global(td) { padding: .55rem .7rem; border: 1px solid #d9e1e8; text-align: left; white-space: nowrap; }
+  .article-body :global(th) { color: #17202b; background: #eef7f8; font-weight: 650; }
+  .article-body :global(hr) { margin: 2rem 0; border: 0; border-top: 1px solid #d9e1e8; }
   .article-body :global(a) { color: #0b7b83; text-decoration: underline; text-underline-offset: .2em; }
   .article-body :global(code) { padding: .12rem .3rem; border-radius: .25rem; background: #eef2f4; color: #0b7b83; font-size: .9em; }
   .article-body :global(pre) { overflow-x: auto; margin: 1.4rem 0; padding: 1rem; border-radius: .5rem; background: #17202b; color: #edf3f6; }
